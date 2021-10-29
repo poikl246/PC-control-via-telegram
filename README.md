@@ -1,8 +1,11 @@
 # PC-control-telegram
 Bot Features:
 Increases the score with some probability 
+
 2 => 3
+
 3 => 4
+
 4 => 5
 
 And there are also commands:
